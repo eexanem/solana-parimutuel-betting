@@ -1,9 +1,9 @@
 tasks:
   - init: |
       # 1. Install Solana CLI (new method)
-      sh -c "$(curl -sSfL https://release.anza.xyz/solana/install)" init v1.18.3
+        
       # 2. Add to PATH
-      echo 'export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bashrc
+      export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
       # 3. Install Anchor
       cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
       # 4. Install Yarn
