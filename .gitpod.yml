@@ -2,6 +2,8 @@ tasks:
   - init: |
       # Install Solana
       sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+      # Add to PATH
+      echo 'export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bashrc
       # Install Anchor
       cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
       # Install Yarn
