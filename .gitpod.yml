@@ -1,7 +1,7 @@
 tasks:
   - init: |
       # 1. Install Solana CLI (new method)
-        
+      sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"  
       # 2. Add to PATH
       export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
       # 3. Install Anchor
