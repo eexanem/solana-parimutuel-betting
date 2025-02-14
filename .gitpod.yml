@@ -1,0 +1,10 @@
+tasks:
+  - init: |
+      # Install Solana
+      sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+      # Install Anchor
+      cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
+      # Install Yarn
+      npm install -g yarn
+      # Install Rust Analyzer (from Microsoft Marketplace)
+      code --install-extension rust-lang.rust-analyzer
