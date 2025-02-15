@@ -1,16 +1,63 @@
 use anchor_lang::prelude::*;
+use anchor_spl::token;
+use metaplex_token_metadata::instruction::create_metadata_accounts_v3;
 
-declare_id!("3VCmwMXEsnak5A58TYDfrtNWd8crioEhkytCmAr91ZsG");
+declare_id!("YourProgramID"); // Update after anchor build
 
 #[program]
 pub mod betting_program {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
+    // Initialize a betting pool with PDA
+    pub fn initialize_pool(ctx: Context<InitializePool>, pool_id: u64) -> Result<()> {
+        let pool = &mut ctx.accounts.pool;
+        pool.pool_id = pool_id;
+        pool.admin = *ctx.accounts.admin.key;
+        Ok(())
+    }
+
+    // Place a bet and mint NFT ticket (simplified)
+    pub fn place_bet(ctx: Context<PlaceBet>, amount: u64) -> Result<()> {
+        // Transfer SOL to pool (simulate betting)
+        **ctx.accounts.user.to_account_info().try_borrow_mut_lamports()? -= amount;
+        **ctx.accounts.pool.to_account_info().try_borrow_mut_lamports()? += amount;
+
+        // TODO: Add Metaplex NFT minting logic
         Ok(())
     }
 }
 
+// PDA-managed pool account
+#[account]
+pub struct Pool {
+    pub pool_id: u64,
+    pub admin: Pubkey,
+    pub total_bets: u64,
+}
+
+// Accounts for initialize_pool (PDA-based)
 #[derive(Accounts)]
-pub struct Initialize {}
+#[instruction(pool_id: u64)]
+pub struct InitializePool<'info> {
+    #[account(
+        init,
+        payer = admin,
+        space = 8 + 8 + 32 + 8, // Anchor discriminator + pool_id + admin + total_bets
+        seeds = [b"pool", admin.key.as_ref(), &pool_id.to_le_bytes()],
+        bump
+    )]
+    pub pool: Account<'info, Pool>,
+    #[account(mut)]
+    pub admin: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+// Accounts for place_bet (simplified)
+#[derive(Accounts)]
+pub struct PlaceBet<'info> {
+    #[account(mut, has_one = admin)] // Security: Validate pool admin
+    pub pool: Account<'info, Pool>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    // TODO: Add Metaplex accounts (mint, metadata, etc.)
+}
