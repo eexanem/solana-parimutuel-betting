@@ -1,8 +1,8 @@
 [workspace]
 members = [
-    "programs/betting-program",
+    "programs/betting-program"
 ]
-
+resolver = "2"  # Add this line
 [profile.release]
 overflow-checks = true
 

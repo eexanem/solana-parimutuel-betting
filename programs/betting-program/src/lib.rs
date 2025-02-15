@@ -1,8 +1,8 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token;
-use metaplex_token_metadata::instruction::create_metadata_accounts_v3;
 
-declare_id!("YourProgramID"); // Update after anchor build
+use mpl_token_metadata::instructions::CreateMetadataAccountV3;
+
+declare_id!("GLzWoeu6BZd4dMN5g7XetngX3Z6cPbr72d4xBY93EhLC"); // Update after anchor build
 
 #[program]
 pub mod betting_program {
@@ -59,5 +59,6 @@ pub struct PlaceBet<'info> {
     pub pool: Account<'info, Pool>,
     #[account(mut)]
     pub user: Signer<'info>,
+    pub admin: Signer<'info>, 
     // TODO: Add Metaplex accounts (mint, metadata, etc.)
 }
