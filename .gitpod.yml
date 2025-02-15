@@ -5,6 +5,8 @@ tasks:
       # 2. Add to PATH
       export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
       # 3. Install Anchor
-      cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
+      cargo install --git https://github.com/coral-xyz/anchor avm --force
+      avm install latest
+      avm use latest
       # 4. Install Yarn
       npm install -g yarn
