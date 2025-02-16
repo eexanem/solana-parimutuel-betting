@@ -1,3 +1,5 @@
+#![allow(unexpected_cfgs)]  
+#![allow(unused_imports)]
 use anchor_lang::prelude::*;
 
 use mpl_token_metadata::instructions::CreateMetadataAccountV3;
