@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 
 use mpl_token_metadata::instructions::CreateMetadataAccountV3;
 
-declare_id!("GLzWoeu6BZd4dMN5g7XetngX3Z6cPbr72d4xBY93EhLC"); // Update after anchor build
+declare_id!("8hLP8PTe7JqorACvs8oPeu7Uop8y6j2Fn9RQVp8ZBzxH"); // Update after anchor build
 
 #[program]
 pub mod betting_program {
