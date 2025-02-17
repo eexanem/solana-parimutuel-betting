@@ -10,5 +10,6 @@ tasks:
       avm use latest
       # 4. Install Yarn
       npm install -g yarn
+      yarn install
       # 5. Install JavaScript/TypeScript Dependencies
       npm install @coral-xyz/anchor @types/node @types/mocha @types/chai chai ts-mocha typescript
